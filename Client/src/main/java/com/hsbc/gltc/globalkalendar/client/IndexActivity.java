@@ -3,6 +3,7 @@ package com.hsbc.gltc.globalkalendar.client;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,10 +31,12 @@ public class IndexActivity extends Activity {
         //Set the activity fullscreen
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.setContentView(R.layout.activity_index);
-        /*if (android.os.Build.VERSION.SDK_INT > 9) {
+
+        // To handle the android.os.NetworkOnMainThreadException
+        if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
-        }*/
+        }
     }
 
 

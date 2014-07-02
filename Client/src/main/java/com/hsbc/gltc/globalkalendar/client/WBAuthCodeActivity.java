@@ -98,6 +98,7 @@ public class WBAuthCodeActivity extends Activity {
     private Button mCodeButton;
     private Button mAuthCodeButton;
     private Button sendMsgBtn;
+    private TextView weiboMsgTV;
     
     /** 微博 Web 授权接口类，提供登陆等功能  */
     private WeiboAuth mWeiboAuth;
@@ -122,7 +123,10 @@ public class WBAuthCodeActivity extends Activity {
         mCodeButton = (Button) findViewById(R.id.code);
         mAuthCodeButton = (Button) findViewById(R.id.auth_code);
         sendMsgBtn = (Button) findViewById(R.id.wb_send_msg);
+        weiboMsgTV = (TextView) findViewById(R.id.testWeiboMsg);
         mAuthCodeButton.setEnabled(false);
+        sendMsgBtn.setEnabled(false);
+        weiboMsgTV.setVisibility(View.GONE);
 
         // 初始化微博对象
         mWeiboAuth = new WeiboAuth(this, Constants.APP_KEY, Constants.REDIRECT_URL, Constants.SCOPE);
@@ -140,6 +144,9 @@ public class WBAuthCodeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 fetchTokenAsync(mCode, WEIBO_DEMO_APP_SECRET);
+                mCodeButton.setEnabled(false);
+                sendMsgBtn.setEnabled(true);
+                weiboMsgTV.setVisibility(View.VISIBLE);
             }
         });
 
@@ -150,7 +157,7 @@ public class WBAuthCodeActivity extends Activity {
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost post = new HttpPost("https://api.weibo.com/2/statuses/update.json");
                 ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("status", getResources().getString(R.string.test_weibo_message)));
+                params.add(new BasicNameValuePair("status", weiboMsgTV.getText().toString()));
                 params.add(new BasicNameValuePair("access_token", mAccessToken.getToken()));
                 try {
                     HttpEntity formEntity = new UrlEncodedFormEntity(params, HTTP.UTF_8);

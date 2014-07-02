@@ -21,21 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="left|center_vertical"
-        android:text="@string/weibosdk_demo_step_to_obtain_code" />	
-	
-    <Button
-        android:id="@+id/auth_code"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left|center_vertical"
-        android:text="@string/weibosdk_demo_step_to_obtain_token" />
-
-    <Button
-        android:id="@+id/wb_send_msg"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left|center_vertical"
-        android:text="@string/test_send_a_message" />
+        android:text="@string/weibosdk_demo_step_to_obtain_code" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,12 +30,19 @@
         android:text="@string/weibosdk_demo_code_text_hint"
         android:textSize="16sp"
         android:textStyle="bold" />
-    
+
     <TextView
         android:id="@+id/code_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="12sp" />    
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/auth_code"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:text="@string/weibosdk_demo_step_to_obtain_token" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,5 +57,20 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="12sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:hint="@string/test_weibo_sendMsg_hint"
+        android:id="@+id/testWeiboMsg" />
+
+    <Button
+        android:id="@+id/wb_send_msg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:text="@string/test_send_a_message" />
 
 </LinearLayout>
