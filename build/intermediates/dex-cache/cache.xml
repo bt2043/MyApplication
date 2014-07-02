@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="C:\Users\Henyue-GZ\AndroidStudioProjects\MyApplication\Client\build\intermediates\pre-dexed\debug\weibosdkcore-6096663ba0db5be728522e545990179d1494801e.jar"
+        jar="C:\Users\Henyue-GZ\AndroidStudioProjects\MyApplication\Client\libs\weibosdkcore.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="06e990ea2d7b7ccd30cea6c5367314d7314d9f40"/>
+    <item
+        dex="C:\Users\Henyue-GZ\AndroidStudioProjects\MyApplication\Client\build\intermediates\pre-dexed\debug\android-support-v4-73f9311b0062b10f944bcac780f1b9a7c65ddd89.jar"
+        jar="C:\Users\Henyue-GZ\AndroidStudioProjects\MyApplication\Client\libs\android-support-v4.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="4a6be13368bb64c5a0b0460632d228a1a915f58f"/>
+
+</pre-dex-items>

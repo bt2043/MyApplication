@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.hsbc.gltc.globalkalendar.client.IndexActivity"
+    android:padding="0dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/index_bg">
+
+        <EditText
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/username"
+            android:gravity="center"
+            android:autoText="true"
+            android:editable="true"
+            android:layout_gravity="center_horizontal"
+            android:hint="Username"
+            android:height="20dp"
+            android:layout_marginTop="220dp"
+            android:background="#FFFFFF"
+            android:singleLine="true"
+            android:clickable="true"
+            android:alpha="0.8" />
+
+        <EditText
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/password"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:password="true"
+            android:editable="true"
+            android:autoText="true"
+            android:background="#FFFFFF"
+            android:layout_gravity="center_horizontal"
+            android:typeface="monospace"
+            android:hint="Password"
+            android:alpha="0.8" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:text="Submit"
+            android:textSize="12dp"
+            android:typeface="monospace"
+            android:id="@+id/loginBtn"
+            android:onClick="onLoginButtonClicked"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="gravity"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="65dp"
+            android:background="#FFFFFF"
+            android:alpha="0.8"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/weiboButton"
+            android:layout_marginTop="120dp"
+            android:src="@drawable/ic_com_sina_weibo_sdk_logo"
+            android:onClick="onTestWeibo"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
