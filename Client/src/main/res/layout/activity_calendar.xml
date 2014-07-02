@@ -1,0 +1,15 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/index_bg"
+    tools:context="com.hsbc.gltc.globalkalendar.client.CalendarActivity">
+
+    <com.tyczj.extendedcalendarview.ExtendedCalendarView
+        android:id="@+id/calendar"
+        android:layout_height="wrap_content"
+        android:background="#999999"
+        android:alpha="0.8"
+        android:layout_width="wrap_content"/>
+
+</RelativeLayout>

@@ -4,6 +4,8 @@
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- For Weibo_Android_SDK -->
     <color name="com_sina_weibo_sdk_blue">#3B5998</color>
 
     <color name="com_sina_weibo_sdk_loginview_text_color">#FFFFFF</color>

@@ -68,6 +68,7 @@
             android:id="@+id/weiboButton"
             android:layout_marginTop="120dp"
             android:src="@drawable/ic_com_sina_weibo_sdk_logo"
+            android:alpha="0.8"
             android:onClick="onTestWeibo"/>
 
     </LinearLayout>

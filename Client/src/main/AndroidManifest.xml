@@ -22,7 +22,11 @@
             android:name=".LoadingActivity"
             android:label="@string/title_activity_loading" >
         </activity>
-        <activity android:name="com.hsbc.gltc.globalkalendar.client.WBAuthCodeActivity" />
+        <activity android:name=".WBAuthCodeActivity" />
+        <activity
+            android:name=".CalendarActivity"
+            android:label="@string/title_activity_calendar" >
+        </activity>
     </application>
 
 </manifest>
