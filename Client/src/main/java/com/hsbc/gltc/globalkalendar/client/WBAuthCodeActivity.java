@@ -18,9 +18,7 @@ package com.hsbc.gltc.globalkalendar.client;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -36,6 +34,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hsbc.gltc.globalkalendar.util.Constants;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuth;
 import com.sina.weibo.sdk.auth.WeiboAuthListener;
@@ -55,10 +54,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 
 /**
@@ -78,11 +75,7 @@ public class WBAuthCodeActivity extends Activity {
 
     private static final String TAG = "WBAuthCodeActivity";
 
-    /**
-     * WeiboSDKDemo 程序的 APP_SECRET。
-     * 请注意：请务必妥善保管好自己的 APP_SECRET，不要直接暴露在程序中，此处仅作为一个DEMO来演示。
-     */
-    private static final String WEIBO_DEMO_APP_SECRET = "4e47e691a516afad0fc490e05ff70ee5";
+
     
     /** 通过 code 获取 Token 的 URL */
     private static final String OAUTH2_ACCESS_TOKEN_URL = "https://open.weibo.cn/oauth2/access_token";
@@ -143,7 +136,7 @@ public class WBAuthCodeActivity extends Activity {
         mAuthCodeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchTokenAsync(mCode, WEIBO_DEMO_APP_SECRET);
+                fetchTokenAsync(mCode, Constants.APP_SECRET);
                 mCodeButton.setEnabled(false);
                 sendMsgBtn.setEnabled(true);
                 weiboMsgTV.setVisibility(View.VISIBLE);
@@ -255,14 +248,6 @@ public class WBAuthCodeActivity extends Activity {
      *                  不要直接暴露在程序中，此处仅作为一个DEMO来演示。
      */
     public void fetchTokenAsync(String authCode, String appSecret) {
-        /*
-        LinkedHashMap<String, String> requestParams = new LinkedHashMap<String, String>();
-        requestParams.put(WBConstants.AUTH_PARAMS_CLIENT_ID,     Constants.APP_KEY);
-        requestParams.put(WBConstants.AUTH_PARAMS_CLIENT_SECRET, appSecretConstantS.APP_SECRET);
-        requestParams.put(WBConstants.AUTH_PARAMS_GRANT_TYPE,    "authorization_code");
-        requestParams.put(WBConstants.AUTH_PARAMS_CODE,          authCode);
-        requestParams.put(WBConstants.AUTH_PARAMS_REDIRECT_URL,  Constants.REDIRECT_URL);
-        */
         WeiboParameters requestParams = new WeiboParameters();
         requestParams.add(WBConstants.AUTH_PARAMS_CLIENT_ID,     Constants.APP_KEY);
         requestParams.add(WBConstants.AUTH_PARAMS_CLIENT_SECRET, appSecret);

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hsbc.gltc.globalkalendar.client;
+package com.hsbc.gltc.globalkalendar.util;
 
 /**
  * 该类定义了微博授权时所需要的参数。
@@ -26,7 +26,14 @@ public interface Constants {
 
     /** 当前 DEMO 应用的 APP_KEY，第三方应用应该使用自己的 APP_KEY 替换该 APP_KEY */
     public static final String APP_KEY      = "2045436852";
-    //public static final String APP_KEY      = "82966982";
+    //public static final String APP_KEY      = "2281287416";
+
+    /**
+     * WeiboSDKDemo 程序的 APP_SECRET。
+     * 请注意：请务必妥善保管好自己的 APP_SECRET，不要直接暴露在程序中，此处仅作为一个DEMO来演示。
+     */
+    public static final String APP_SECRET = "4e47e691a516afad0fc490e05ff70ee5";
+    //public static final String APP_SECRET = "893462cb24e8b5119dec380f7152d953";
 
     /** 
      * 当前 DEMO 应用的回调页，第三方应用可以使用自己的回调页。
@@ -56,4 +63,6 @@ public interface Constants {
             "email,direct_messages_read,direct_messages_write,"
             + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
             + "follow_app_official_microblog," + "invitation_write";
+
+    public static final String UPDATE_URL = "https://api.weibo.com/2/statuses/update.json";
 }
