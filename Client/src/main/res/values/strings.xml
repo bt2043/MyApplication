@@ -7,14 +7,24 @@
     <string name="title_activity_loading">LoadingActivity</string>
     <string name="loginValidationError">Username/Password can not be empty.</string>
     <string name="blank"></string>
-    // ExtendCalendar    <string name="monday">MON</string>
+    // 微信
+    <string name="weixinTitle">分享到朋友圈</string>
+    <string name="weixinPicTip">请选择要分享的图片</string>
+    <string name="weixinTextTip">请输入要分享到微信的文字内容：</string>
+    <string name="weixinSendType">分享给：</string>
+    <string name="weixinSendTypeFriends">微信好友</string>
+    <string name="weixinSendTypeTimeline">朋友圈</string>
+    <string name="weixinSendTypeFav">收藏</string>
+    <string name="weixinSend">发送</string>
+    // ExtendCalendar
+    <string name="monday">MON</string>
     <string name="tuesday">TUE</string>
     <string name="wednesday">WED</string>
     <string name="thursday">THU</string>
     <string name="friday">FRI</string>
     <string name="saturday">SAT</string>
     <string name="sunday">SUN</string>
-    // 微博Android SDK    <string name="title_activity_weibo_oauth">WeiboOAuthActivity</string>
+    // 微博Android SDK        <string name="title_activity_weibo_oauth">WeiboOAuthActivity</string>
     <string name="com_sina_weibo_sdk_login_with_weibo_account">用微博登录</string>
     <string name="com_sina_weibo_sdk_login">登录</string>
     <string name="com_sina_weibo_sdk_logout">注销</string>
@@ -33,5 +43,6 @@
     <string name="test_weibo_sendMsg_hint">在此输入想要发送的微博内容！</string>
     <string name="test_weibo_sendMsg_success">成功发布微博！</string>
     <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="title_activity_weixin">WeixinActivity</string>
 
 </resources>

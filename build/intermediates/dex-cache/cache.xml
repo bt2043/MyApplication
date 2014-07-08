@@ -13,5 +13,11 @@
         jumboMode="false"
         revision="19.1.0"
         sha1="4a6be13368bb64c5a0b0460632d228a1a915f58f"/>
+    <item
+        dex="C:\Users\Henyue-GZ\AndroidStudioProjects\MyApplication\Client\build\intermediates\pre-dexed\debug\libammsdk-4f374661a56fccfccdaad0ff39c41b495aadfc01.jar"
+        jar="C:\Users\Henyue-GZ\AndroidStudioProjects\MyApplication\Client\libs\libammsdk.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="ef29ec238e1bad6c47297595fada8d7a7d794ff0"/>
 
 </pre-dex-items>

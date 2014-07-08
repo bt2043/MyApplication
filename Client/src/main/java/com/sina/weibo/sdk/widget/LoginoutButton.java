@@ -115,7 +115,7 @@ public class LoginoutButton extends Button implements OnClickListener {
     /**
      * 设置微博授权所需信息。
      * 
-     * @param appKey       第三方应用的 APP_KEY
+     * @param appKey       第三方应用的 WEIBO_APP_KEY
      * @param redirectUrl  第三方应用的回调页
      * @param scope        第三方应用申请的权限
      * @param authListener 微博授权认证回调接口

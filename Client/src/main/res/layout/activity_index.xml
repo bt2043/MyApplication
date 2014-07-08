@@ -62,14 +62,31 @@
             android:background="#FFFFFF"
             android:alpha="0.8"/>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/weiboButton"
-            android:layout_marginTop="120dp"
-            android:src="@drawable/ic_com_sina_weibo_sdk_logo"
-            android:alpha="0.8"
-            android:onClick="onTestWeibo"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/weiboButton"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="120dp"
+                android:src="@drawable/weibo"
+                android:background="#000000"
+                android:onClick="onTestWeibo"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/weixinButton"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="120dp"
+                android:src="@drawable/weixin"
+                android:background="#000000"
+                android:onClick="onTestWeixin"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

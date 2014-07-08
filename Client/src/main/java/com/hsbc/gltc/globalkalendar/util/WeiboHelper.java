@@ -37,7 +37,7 @@ public class WeiboHelper {
     }
 
     public static void sendWeibo(Context context, String accessToken, String msg) {
-        HttpPost post = new HttpPost(Constants.UPDATE_URL);
+        HttpPost post = new HttpPost(Constants.WEIBO_UPDATE_URL);
         Map<String, String> params = new HashMap<String, String>();
         params.put("source", "3G5oUM");
         params.put("status", msg);

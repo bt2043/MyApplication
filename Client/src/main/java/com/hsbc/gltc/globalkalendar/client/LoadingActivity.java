@@ -30,9 +30,10 @@ public class LoadingActivity extends Activity {
                 Intent intent = new Intent();
                 intent.setClass(LoadingActivity.this, CalendarActivity.class);
                 LoadingActivity.this.startActivity(intent);
+                LoadingActivity.this.finish();
             }
         };
-        timer.schedule(tt, 3000);
+        timer.schedule(tt, 1000);
     }
 
 

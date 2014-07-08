@@ -82,6 +82,10 @@ public class IndexActivity extends Activity {
         startActivity(new Intent(IndexActivity.this, WBAuthCodeActivity.class));
     }
 
+    public void onTestWeixin(View view) {
+        startActivity(new Intent(IndexActivity.this, WeixinActivity.class));
+    }
+
     private void alert(int resourceId) {
         Toast.makeText(IndexActivity.this, resourceId, Toast.LENGTH_SHORT).show();
     }

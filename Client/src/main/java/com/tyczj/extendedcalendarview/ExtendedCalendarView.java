@@ -6,6 +6,7 @@ import java.util.Locale;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -35,6 +36,8 @@ public class ExtendedCalendarView extends RelativeLayout implements OnItemClickL
 	private RelativeLayout base;
 	private ImageView next,prev;
 	private int gestureType = 0;
+    private float x_up;
+    private float x_down;
 	private final GestureDetector calendarGesture = new GestureDetector(context,new GestureListener());
 	
 	public static final int NO_GESTURE = 0;
@@ -81,6 +84,7 @@ public class ExtendedCalendarView extends RelativeLayout implements OnItemClickL
 		prev = new ImageView(context);
 		prev.setId(1);
 		prev.setLayoutParams(params);
+        prev.setBackgroundColor(Color.WHITE);
 		prev.setImageResource(R.drawable.navigation_previous_item);
 		prev.setOnClickListener(this);
 		base.addView(prev);
@@ -94,6 +98,7 @@ public class ExtendedCalendarView extends RelativeLayout implements OnItemClickL
 		month.setTextAppearance(context, android.R.attr.textAppearanceLarge);
 		month.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())+" "+cal.get(Calendar.YEAR));
 		month.setTextSize(25);
+        month.setTextColor(Color.WHITE);
 		
 		base.addView(month);
 		
@@ -105,6 +110,7 @@ public class ExtendedCalendarView extends RelativeLayout implements OnItemClickL
 		next = new ImageView(context);
 		next.setImageResource(R.drawable.navigation_next_item);
 		next.setLayoutParams(params);
+        next.setBackgroundColor(Color.WHITE);
 		next.setId(3);
 		next.setOnClickListener(this);
 		
@@ -132,6 +138,25 @@ public class ExtendedCalendarView extends RelativeLayout implements OnItemClickL
 			
 	        @Override
 	        public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    x_down = event.getX();
+                    return true;
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    x_up = event.getX();
+                    System.out.println("x_down="+x_down + ", x_up="+x_up);
+                    if (x_down - x_up > 200) {
+                        // 左滑动
+                        return next.callOnClick();
+                    } else if (x_up - x_down > 200) {
+                        // 右滑动
+                        return prev.callOnClick();
+                    } else {
+                        System.out.println("click");
+                        // 滑动误差范围内，判定为Click事件
+                        return v.callOnClick();
+                    }
+                }
 	            return calendarGesture.onTouchEvent(event);
 	        }
 	    });

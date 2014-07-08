@@ -1,15 +1,20 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/index_bg"
+    android:orientation="vertical"
     tools:context="com.hsbc.gltc.globalkalendar.client.CalendarActivity">
 
     <com.tyczj.extendedcalendarview.ExtendedCalendarView
         android:id="@+id/calendar"
+        android:layout_width="fill_parent"
+        android:layout_height="350dp"
+        android:background="#60000000"/>
+    
+    <fragment android:name="com.hsbc.gltc.globalkalendar.client.CommentFragment"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#999999"
-        android:alpha="0.8"
-        android:layout_width="wrap_content"/>
+        android:layout_marginTop="10dp"/>
 
-</RelativeLayout>
+</LinearLayout>
