@@ -78,6 +78,11 @@ public class IndexActivity extends Activity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        System.exit(0);
+    }
+
     public void onTestWeibo(View view) {
         startActivity(new Intent(IndexActivity.this, WBAuthCodeActivity.class));
     }
