@@ -5,20 +5,55 @@
     android:layout_height="fill_parent"
     tools:context="com.hsbc.gltc.globalkalendar.client.WeixinActivity">
 
-    <TextView
-        android:text="@string/weixinPicTip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/weixinSendSubject"
+        android:id="@+id/weixinTitle"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="@string/weixinPicTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/blank"
+            android:visibility="gone"
+            android:id="@+id/weixinImageSrc" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#EEEEEEEE">
+        <ImageView
+            android:id="@+id/weixinImage"
+            android:layout_width="fill_parent"
+            android:layout_height="350dp"
+            android:scaleType="centerInside"
+            android:onClick="selectImage" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="@string/weixinTextTip"/>
 
     <EditText
         android:id="@+id/weixinMsg"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="@string/weixinSendHint"/>
 
     <LinearLayout
         android:layout_width="fill_parent"

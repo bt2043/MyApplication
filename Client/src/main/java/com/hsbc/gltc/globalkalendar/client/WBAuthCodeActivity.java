@@ -32,7 +32,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hsbc.gltc.globalkalendar.util.Constants;
+import com.hsbc.gltc.globalkalendar.util.DBHelper;
+import com.hsbc.gltc.globalkalendar.util.SysConstants;
 import com.hsbc.gltc.globalkalendar.util.WeiboHelper;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuth;
@@ -80,6 +81,11 @@ public class WBAuthCodeActivity extends Activity {
 
     /** 微博 Web 授权接口类，提供登陆等功能  */
     private WeiboAuth mWeiboAuth;
+    private String appKey;
+    private String appSec;
+    private String appScope;
+    private String appRedirectURL;
+
     /** 获取到的 Code */
     private String mCode;
     /** 获取到的 Token */
@@ -107,7 +113,11 @@ public class WBAuthCodeActivity extends Activity {
         weiboMsgTV.setVisibility(View.GONE);
 
         // 初始化微博对象
-        mWeiboAuth = new WeiboAuth(this, Constants.WEIBO_APP_KEY, Constants.WEIBO_REDIRECT_URL, Constants.WEIBO_SCOPE);
+        appKey = getSysProperties(SysConstants.WEIBO_APP_KEY);
+        appRedirectURL = getSysProperties(SysConstants.WEIBO_REDIRECT_URL);
+        appScope = getSysProperties(SysConstants.WEIBO_SCOPE);
+        appSec = getSysProperties(SysConstants.WEIBO_APP_SECRET);
+        mWeiboAuth = new WeiboAuth(this,appKey, appRedirectURL, appScope);
 
         // 第一步：获取 Code
         mCodeButton.setOnClickListener(new OnClickListener() {
@@ -121,7 +131,7 @@ public class WBAuthCodeActivity extends Activity {
         mAuthCodeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchTokenAsync(mCode, Constants.WEIBO_APP_SECRET);
+                fetchTokenAsync(mCode, appSec);
                 mCodeButton.setEnabled(false);
                 sendMsgBtn.setEnabled(true);
                 weiboMsgTV.setVisibility(View.VISIBLE);
@@ -132,7 +142,7 @@ public class WBAuthCodeActivity extends Activity {
         sendMsgBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                WeiboHelper.sendWeibo(WBAuthCodeActivity.this, mAccessToken.getToken(), weiboMsgTV.getText().toString());
+                WeiboHelper.sendWeibo(WBAuthCodeActivity.this, mAccessToken.getToken(), weiboMsgTV);
             }
         });
     }
@@ -178,6 +188,10 @@ public class WBAuthCodeActivity extends Activity {
         }
     }
 
+    private String getSysProperties(SysConstants constants) {
+        return DBHelper.getSysProperties(this, constants);
+    }
+
     /**
      * 该 Handler 配合 {@link RequestListener} 对应的回调来更新 UI。
      */
@@ -216,11 +230,11 @@ public class WBAuthCodeActivity extends Activity {
      */
     public void fetchTokenAsync(String authCode, String appSecret) {
         WeiboParameters requestParams = new WeiboParameters();
-        requestParams.add(WBConstants.AUTH_PARAMS_CLIENT_ID,     Constants.WEIBO_APP_KEY);
+        requestParams.add(WBConstants.AUTH_PARAMS_CLIENT_ID,     appKey);
         requestParams.add(WBConstants.AUTH_PARAMS_CLIENT_SECRET, appSecret);
         requestParams.add(WBConstants.AUTH_PARAMS_GRANT_TYPE,    "authorization_code");
         requestParams.add(WBConstants.AUTH_PARAMS_CODE,          authCode);
-        requestParams.add(WBConstants.AUTH_PARAMS_REDIRECT_URL,  Constants.WEIBO_REDIRECT_URL);
+        requestParams.add(WBConstants.AUTH_PARAMS_REDIRECT_URL,  appRedirectURL);
     
         /**
          * 请注意：
@@ -231,31 +245,31 @@ public class WBAuthCodeActivity extends Activity {
             @Override
             public void onComplete(String response) {
                 LogUtil.d(TAG, "Response: " + response);
-                
+
                 // 获取 Token 成功
                 Oauth2AccessToken token = Oauth2AccessToken.parseAccessToken(response);
                 if (token != null && token.isSessionValid()) {
                     LogUtil.d(TAG, "Success! " + token.toString());
-                    
+
                     mAccessToken = token;
                     mHandler.obtainMessage(MSG_FETCH_TOKEN_SUCCESS).sendToTarget();
                 } else {
                     LogUtil.d(TAG, "Failed to receive access token");
                 }
             }
-    
+
             @Override
             public void onComplete4binary(ByteArrayOutputStream responseOS) {
                 LogUtil.e(TAG, "onComplete4binary...");
                 mHandler.obtainMessage(MSG_FETCH_TOKEN_FAILED).sendToTarget();
             }
-    
+
             @Override
             public void onIOException(IOException e) {
                 LogUtil.e(TAG, "onIOException： " + e.getMessage());
                 mHandler.obtainMessage(MSG_FETCH_TOKEN_FAILED).sendToTarget();
             }
-    
+
             @Override
             public void onError(WeiboException e) {
                 LogUtil.e(TAG, "WeiboException： " + e.getMessage());

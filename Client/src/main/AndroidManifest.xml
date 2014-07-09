@@ -34,4 +34,9 @@
         </activity>
     </application>
 
+    <!-- 配置测试环境 -->
+    <instrumentation android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.hsbc.gltc.globalkalendar.test"
+        android:label="Test for My App"/>
+
 </manifest>

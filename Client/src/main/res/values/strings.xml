@@ -7,15 +7,21 @@
     <string name="title_activity_loading">LoadingActivity</string>
     <string name="loginValidationError">Username/Password can not be empty.</string>
     <string name="blank"></string>
+
     // 微信
     <string name="weixinTitle">分享到朋友圈</string>
-    <string name="weixinPicTip">请选择要分享的图片</string>
+    <string name="weixinSendSubject">分享主题</string>
+    <string name="weixinPicTip">请选择要分享的图片：</string>
+    <string name="weixinAddPic">添加</string>
     <string name="weixinTextTip">请输入要分享到微信的文字内容：</string>
     <string name="weixinSendType">分享给：</string>
     <string name="weixinSendTypeFriends">微信好友</string>
     <string name="weixinSendTypeTimeline">朋友圈</string>
     <string name="weixinSendTypeFav">收藏</string>
     <string name="weixinSend">发送</string>
+    <string name="weixinSendHint">在此输入要分享的内容</string>
+    <string name="weixinValidation">分享必须至少有一张图片或者一则文字</string>
+
     // ExtendCalendar
     <string name="monday">MON</string>
     <string name="tuesday">TUE</string>

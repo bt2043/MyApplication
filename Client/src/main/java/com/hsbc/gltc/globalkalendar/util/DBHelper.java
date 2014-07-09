@@ -3,44 +3,80 @@ package com.hsbc.gltc.globalkalendar.util;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Created by Henyue-GZ on 2014/7/8.
  */
-public class DBHelper extends SQLiteOpenHelper {
-    private static final String DB_NAME = "kalendar.7z";
-    private static final int DB_VERSION = 2;
+public class DBHelper {
+    private static final String DB_NAME = "kalendar.xml";
+    private static SQLiteDatabase readableDB;
+    private static SQLiteDatabase writableDB;
 
-    public DBHelper(Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
+    private static SQLiteDatabase getReadableDB(Context context) throws IOException {
+        if (readableDB == null) {
+            readableDB = getDB(context, SQLiteDatabase.OPEN_READONLY);
+        }
+        return readableDB;
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL("drop table if exists SYS_PROPERTIES");
-        db.execSQL("create table SYS_PROPERTIES(key TEXT PRIMARY KEY, value TEXT)");
-        db.execSQL("insert into SYS_PROPERTIES values('WEIBO_APP_KEY', '1496930975')");
-        db.execSQL("insert into SYS_PROPERTIES values('WEIBO_APP_SECRET', '567471f5eac4d3e9bc41cb2a2b221bc6')");
-        db.execSQL("insert into SYS_PROPERTIES values('WEIBO_REDIRECT_URL', 'WEIBO_REDIRECT_URL')");
-        db.execSQL("insert into SYS_PROPERTIES values('WEIBO_SCOPE', 'email,direct_messages_read,direct_messages_write,friendships_groups_read,friendships_groups_write,statuses_to_me_read,follow_app_official_microblog,invitation_write')");
-        db.execSQL("insert into SYS_PROPERTIES values('WEIBO_OAUTH2_URL', 'https://api.weibo.com/oauth2/authorize')");
-        db.execSQL("insert into SYS_PROPERTIES values('WEIBO_UPDATE_URL', 'https://api.weibo.com/2/statuses/update.json')");
-        db.execSQL("insert into SYS_PROPERTIES values('WEIXIN_APP_KEY', 'wxebe6bb0d16a86b99')");
+    private static SQLiteDatabase getWritableDB(Context context) throws IOException {
+        if (writableDB == null || !writableDB.isOpen()) {
+            writableDB = getDB(context, SQLiteDatabase.OPEN_READWRITE);
+        }
+        return writableDB;
     }
 
-    public String getProperties(String key) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select value from SYS_PROPERTIES where key = ?", new String[]{key});
-        if (cursor.moveToFirst()) {
-            String value = cursor.getString(cursor.getColumnIndex("value"));
-            return value;
+    private static SQLiteDatabase getDB(Context context, int flag) throws IOException {
+        String filesDir = context.getFilesDir().getAbsolutePath();
+        String dbFullPath = filesDir + "/" + DB_NAME;
+        initDBToDevice(context, dbFullPath);
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(dbFullPath, null, flag);
+        return db;
+    }
+
+    /**
+     * Copy the database from assets to device storage while the database not exists.
+     * @param context
+     * @param dbFullPath
+     * @throws IOException
+     */
+    private static void initDBToDevice(Context context, String dbFullPath) throws IOException {
+        File f = new File(dbFullPath);
+        if (!f.exists()) {
+            InputStream is = context.getAssets().open(DB_NAME);
+            OutputStream os = new FileOutputStream(dbFullPath);
+
+            // Write file
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+
+            // close streams
+            os.flush();
+            os.close();
+            is.close();
+        }
+    }
+
+    public static String getSysProperties(Context context, SysConstants key) {
+        try {
+            Cursor cursor = getReadableDB(context).rawQuery("select value from SYS_PROPERTIES where key = ?", new String[]{key.name()});
+            if (cursor.moveToFirst()) {
+                String value = cursor.getString(cursor.getColumnIndex("value"));
+                cursor.close();
+                return value;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return null;
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 }

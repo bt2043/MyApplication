@@ -1,6 +1,7 @@
 package com.hsbc.gltc.globalkalendar.util;
 
 import android.content.Context;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hsbc.gltc.globalkalendar.client.R;
@@ -36,11 +37,11 @@ public class WeiboHelper {
         return client;
     }
 
-    public static void sendWeibo(Context context, String accessToken, String msg) {
-        HttpPost post = new HttpPost(Constants.WEIBO_UPDATE_URL);
+    public static void sendWeibo(Context context, String accessToken, TextView msgTV) {
+        HttpPost post = new HttpPost(getSysProperties(context, SysConstants.WEIBO_UPDATE_URL));
         Map<String, String> params = new HashMap<String, String>();
         params.put("source", "3G5oUM");
-        params.put("status", msg);
+        params.put("status", msgTV.getText().toString());
         params.put("access_token", accessToken);
         try {
             post.setEntity(createFormEntity(params));
@@ -53,6 +54,10 @@ public class WeiboHelper {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static String getSysProperties(Context context, SysConstants sysCons) {
+        return DBHelper.getSysProperties(context, sysCons);
     }
 
     private static HttpEntity createFormEntity(Map<String, String> params) throws UnsupportedEncodingException {
