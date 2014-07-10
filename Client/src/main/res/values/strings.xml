@@ -22,6 +22,7 @@
     <string name="weixinSend">发送</string>
     <string name="weixinSendHint">在此输入要分享的内容</string>
     <string name="weixinValidation">分享必须至少有一张图片或者一则文字</string>
+    <string name="copyTextTips">已将文本内容复制到剪贴板</string>
 
     // ExtendCalendar
     <string name="monday">MON</string>

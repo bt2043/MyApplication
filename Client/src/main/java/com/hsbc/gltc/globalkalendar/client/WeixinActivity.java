@@ -1,6 +1,8 @@
 package com.hsbc.gltc.globalkalendar.client;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -135,7 +137,10 @@ public class WeixinActivity extends Activity {
         req.message = msg;
 
        if (wxApi.sendReq(req)) {
-           wxMsgTV.setText(R.string.blank);
+           ClipboardManager cmb = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+           cmb.setPrimaryClip(ClipData.newPlainText("Weixin Message", text));
+           wxMsgTV.setText(null);
+           Toast.makeText(this, R.string.copyTextTips, Toast.LENGTH_SHORT).show();
            return true;
        } else {
            return false;
@@ -153,6 +158,7 @@ public class WeixinActivity extends Activity {
 
     public void clearImage(View view) {
         imageView.setImageURI(null);
+        imageSrc.setText(null);
         clearImgBtn.setVisibility(View.GONE);
     }
 
