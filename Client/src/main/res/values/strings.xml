@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Global Calendar</string>
+    <!--<string name="app_name">Global Calendar</string>-->
+    <string name="app_name">小唯的白日梦</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_loading">LoadingActivity</string>
@@ -30,7 +31,9 @@
     <string name="friday">FRI</string>
     <string name="saturday">SAT</string>
     <string name="sunday">SUN</string>
-    // 微博Android SDK        <string name="title_activity_weibo_oauth">WeiboOAuthActivity</string>
+
+    // 微博Android SDK
+    <string name="title_activity_weibo_oauth">WeiboOAuthActivity</string>
     <string name="com_sina_weibo_sdk_login_with_weibo_account">用微博登录</string>
     <string name="com_sina_weibo_sdk_login">登录</string>
     <string name="com_sina_weibo_sdk_logout">注销</string>
@@ -49,6 +52,5 @@
     <string name="test_weibo_sendMsg_hint">在此输入想要发送的微博内容！</string>
     <string name="test_weibo_sendMsg_success">成功发布微博！</string>
     <string name="title_activity_calendar">CalendarActivity</string>
-    <string name="title_activity_weixin">WeixinActivity</string>
 
 </resources>
