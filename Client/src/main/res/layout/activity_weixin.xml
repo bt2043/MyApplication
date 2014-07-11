@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="@string/weixinSendSubject"
-        android:id="@+id/weixinTitle"/>
+        android:id="@+id/weixinTitle" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -34,15 +34,14 @@
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:background="#EEEEEEEE">
+        android:layout_gravity="right">
         <ImageView
             android:id="@+id/weixinImage"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="200dp"
+            android:layout_height="200dp"
             android:scaleType="centerInside"
-            android:onClick="selectImage" />
+            android:onClick="selectImage"
+            android:background="@android:color/transparent"/>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -55,6 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="X"
+                android:textColor="@android:color/white"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:visibility="gone"
@@ -77,46 +77,21 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:gravity="top|right">
 
-        <RadioGroup
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/weixinSendTypeRG">
+        <Spinner
+            android:id="@+id/weixinSendType"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/weixinSendType"/>
+        <Button
+            android:text="@string/weixinSend"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:onClick="sendWeixinMsg"/>
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/weixinSendTypeFriends"
-                android:id="@+id/sendToFriendsRB" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/weixinSendTypeTimeline"
-                android:checked="true"
-                android:id="@+id/sendToTimelineRB" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/weixinSendTypeFav"
-                android:id="@+id/sendToFavRB" />
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:text="@string/weixinSend"
-                android:layout_marginLeft="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="sendWeixinMsg"/>
-        </RadioGroup>
     </LinearLayout>
 
 </LinearLayout>

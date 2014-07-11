@@ -1,6 +1,7 @@
 package com.hsbc.gltc.globalkalendar.client;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;

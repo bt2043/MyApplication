@@ -1,6 +1,5 @@
 package com.hsbc.gltc.globalkalendar.client;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -8,9 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 
-import com.hsbc.gltc.globalkalendar.client.R;
-
 public class CalendarActivity extends FragmentActivity {
+    private Intent backPressIntent = new Intent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +17,7 @@ public class CalendarActivity extends FragmentActivity {
         super.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_calendar);
+        backPressIntent.setClass(this, IndexActivity.class);
     }
 
 
@@ -43,8 +42,7 @@ public class CalendarActivity extends FragmentActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent();
-        intent.setClass(CalendarActivity.this, IndexActivity.class);
-        CalendarActivity.this.startActivity(intent);
+        this.startActivity(backPressIntent);
+        this.onDestroy();
     }
 }

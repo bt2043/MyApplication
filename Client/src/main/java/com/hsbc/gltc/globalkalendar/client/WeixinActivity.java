@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,9 +16,10 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,8 @@ import com.hsbc.gltc.globalkalendar.util.BitmapHelper;
 import com.hsbc.gltc.globalkalendar.util.DBHelper;
 import com.hsbc.gltc.globalkalendar.util.SysConstants;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.sdk.modelmsg.WXAppExtendObject;
+import com.tencent.mm.sdk.modelmsg.WXFileObject;
 import com.tencent.mm.sdk.modelmsg.WXImageObject;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.modelmsg.WXTextObject;
@@ -44,7 +48,7 @@ public class WeixinActivity extends Activity {
     private TextView wxTitleTV;
     private TextView wxMsgTV;
     private TextView wxPicTV;
-    private RadioGroup sendTypeRG;
+    private Spinner wxSendTypeSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +65,9 @@ public class WeixinActivity extends Activity {
         wxTitleTV = (TextView) findViewById(R.id.weixinTitle);
         wxMsgTV = (TextView) findViewById(R.id.weixinMsg);
         wxPicTV = (TextView) findViewById(R.id.weixinImageSrc);
-        sendTypeRG = (RadioGroup)findViewById(R.id.weixinSendTypeRG);
+        wxSendTypeSpinner = (Spinner) findViewById(R.id.weixinSendType);
+        ArrayAdapter<CharSequence> sendTypeAdapter = ArrayAdapter.createFromResource(this, R.array.weixinSendType, android.R.layout.simple_spinner_dropdown_item);
+        wxSendTypeSpinner.setAdapter(sendTypeAdapter);
     }
 
     @Override
@@ -89,15 +95,21 @@ public class WeixinActivity extends Activity {
         String imageSrc = wxPicTV.getText().toString().trim();
 
         if (text.length() == 0 && imageSrc.length() == 0) {
-            Toast.makeText(this, R.string.weixinValidation, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.weixinContentValidation, Toast.LENGTH_SHORT).show();
             return false;
+        }
+
+        int scene = wxSendTypeSpinner.getSelectedItemPosition() - 1;
+        if (scene < 0) {
+            Toast.makeText(this, R.string.weixinSendTypeTip, Toast.LENGTH_SHORT).show();
         }
 
         WXMediaMessage msg;
         if (imageSrc.length() > 0){
-            WXWebpageObject webpageObject = new WXWebpageObject();
-            webpageObject.webpageUrl = "http://bt2043.github.io/WeDayDream";
-            msg = new WXMediaMessage(webpageObject);
+            WXAppExtendObject appdata = new WXAppExtendObject();
+            appdata.filePath = imageSrc;
+            appdata.extInfo = "This is an extInfo";
+            msg = new WXMediaMessage(appdata);
 
             //The image been selected, should set mediaObject as image
             WXImageObject imageObject = new WXImageObject();
@@ -121,18 +133,8 @@ public class WeixinActivity extends Activity {
         }
         msg.description = text;
 
-        int selectedRBId = sendTypeRG.getCheckedRadioButtonId();
-        int scene;
-        if (selectedRBId == R.id.sendToFriendsRB) {
-            scene = SendMessageToWX.Req.WXSceneSession;
-        } else if (selectedRBId == R.id.sendToTimelineRB) {
-            scene = SendMessageToWX.Req.WXSceneTimeline;
-        } else {
-            scene = SendMessageToWX.Req.WXSceneFavorite;
-        }
-
         SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = "webpage" + System.currentTimeMillis();
+        req.transaction = "appdata" + System.currentTimeMillis();
         req.scene = scene;
         req.message = msg;
 
@@ -158,6 +160,7 @@ public class WeixinActivity extends Activity {
 
     public void clearImage(View view) {
         imageView.setImageURI(null);
+        imageView.setBackgroundColor(Color.TRANSPARENT);
         imageSrc.setText(null);
         clearImgBtn.setVisibility(View.GONE);
     }
@@ -168,6 +171,7 @@ public class WeixinActivity extends Activity {
         if (resultCode == RESULT_OK && requestCode == 2) {
             Uri uri = data.getData();
             imageView.setImageURI(uri);
+            imageView.setBackgroundColor(Color.BLACK);
 
             System.out.println(uri);
             imageSrc.setText(getMediaPathFromUri(uri));

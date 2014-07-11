@@ -15,13 +15,16 @@
     <string name="weixinPicTip">请选择要分享的图片：</string>
     <string name="weixinAddPic">添加</string>
     <string name="weixinTextTip">请输入要分享到微信的文字内容：</string>
-    <string name="weixinSendType">分享给：</string>
-    <string name="weixinSendTypeFriends">微信好友</string>
-    <string name="weixinSendTypeTimeline">朋友圈</string>
-    <string name="weixinSendTypeFav">收藏</string>
+    <string-array name="weixinSendType">
+        <item>分享至</item>
+        <item>微信好友</item>
+        <item>朋友圈</item>
+        <item>收藏</item>
+    </string-array>
+    <string name="weixinSendTypeTip">请选择要分享给谁</string>
     <string name="weixinSend">发送</string>
     <string name="weixinSendHint">在此输入要分享的内容</string>
-    <string name="weixinValidation">分享必须至少有一张图片或者一则文字</string>
+    <string name="weixinContentValidation">分享必须至少有一张图片或者一则文字</string>
     <string name="copyTextTips">已将文本内容复制到剪贴板</string>
 
     // ExtendCalendar
